@@ -13,10 +13,10 @@ script:
 after_success:
   - docker build -t rezride/multi-client ./client
   - docker build -t rezride/multi-nginx ./nginx
-  - docker build -t rezirde/multi-server ./server
+  - docker build -t rezride/multi-server ./server
   - docker build -t rezride/multi-worker ./worker
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
   - docker push rezride/multi-client
   - docker push rezride/multi-nginx
   - docker push rezride/multi-server
-  - docker push rezride/multiworker
+  - docker push rezride/multi-worker
