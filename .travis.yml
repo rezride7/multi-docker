@@ -1,0 +1,22 @@
+sudo: required
+language: generic
+services:
+  - docker
+
+before_install:
+  - docker build -t rezride/react-test -f ./client/Dockerfile.dev ./client
+
+script:
+  - docker run -e CI=true rezride/react-test npm test
+
+
+after_success:
+  - docker build -t rezride/multi-client ./client
+  - docker build -t rezride/multi-nginx ./nginx
+  - docker build -t rezirde/multi-server ./server
+  - docker build -t rezride/multi-worker ./worker
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
+  - docker push rezride/multi-client
+  - docker push rezride/multi-nginx
+  - docker push rezride/multi-server
+  - docker push rezride/multiworker
