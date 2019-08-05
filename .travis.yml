@@ -20,3 +20,23 @@ after_success:
   - docker push rezride/multi-nginx
   - docker push rezride/multi-server
   - docker push rezride/multi-worker
+
+deploy:
+  provider: elasticbeanstalk
+  regions: us-east-1
+  app: multi-docker
+  env: MultiDocker-env
+  bucket_name: elasticbeanstalk-us-east-1-413123695639
+  bucket_path: docker-multi
+  on:
+    branch: master
+  access_key_id:
+    secure: $AWS_ACCESS_KEY
+  secret_access_key:
+    secure: $AWS_SECRET_KEY
+
+
+
+
+ access_key_id:
+  secure: $AWS_ACCESS_KEY
