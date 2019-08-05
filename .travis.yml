@@ -9,7 +9,6 @@ before_install:
 script:
   - docker run -e CI=true rezride/react-test npm test
 
-
 after_success:
   - docker build -t rezride/multi-client ./client
   - docker build -t rezride/multi-nginx ./nginx
@@ -34,9 +33,3 @@ deploy:
     secure: $AWS_ACCESS_KEY
   secret_access_key:
     secure: $AWS_SECRET_KEY
-
-
-
-
- access_key_id:
-  secure: $AWS_ACCESS_KEY
